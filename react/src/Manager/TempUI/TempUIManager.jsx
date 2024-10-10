@@ -1,21 +1,67 @@
-import React from 'react'
-import { Outlet } from 'react-router-dom'
-import LeftSidebar from '../Component/LeftSidebar'
-import MyHeader from '../Component/MyHeader'
+import React, { useEffect, useState } from "react";
+import { Outlet } from "react-router-dom";
+import LeftSidebar from "../Component/LeftSidebar";
+import MyHeader from "../Component/MyHeader";
 
 const TempUIManager = () => {
+  const [sidebarType, setSidebarType] = useState("full");
+  const [miniSidebar, setMiniSidebar] = useState(false);
+  const [showSidebar, setShowSidebar] = useState(false); // Trạng thái cho show-sidebar
+
+  // Hàm để thiết lập kiểu sidebar dựa trên kích thước màn hình
+  const setSidebarTypeHandler = () => {
+    const width =
+      window.innerWidth > 0 ? window.innerWidth : window.screen.width;
+    if (width < 1199) {
+      setSidebarType("mini-sidebar");
+      setMiniSidebar(true);
+    } else {
+      setSidebarType("full");
+      setMiniSidebar(false);
+    }
+  };
+
+  useEffect(() => {
+    setSidebarTypeHandler(); // Thiết lập lần đầu khi render
+    window.addEventListener("resize", setSidebarTypeHandler); // Lắng nghe sự kiện resize
+
+    // Cleanup function để loại bỏ listener khi component unmount
+    return () => {
+      window.removeEventListener("resize", setSidebarTypeHandler);
+    };
+  }, []);
+
+  // Xử lý toggle sidebar
+  const handleSidebarToggle = () => {
+    setMiniSidebar(!miniSidebar);
+    setSidebarType(!miniSidebar ? "mini-sidebar" : "full");
+    setShowSidebar(!showSidebar); // Toggle trạng thái show-sidebar
+  };
+
   return (
-    <div className="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed">
-  {/* Sidebar Start */}
-  <LeftSidebar></LeftSidebar>
-  {/*  Sidebar End */}
-  {/*  Main wrapper */}
-  <div className="body-wrapper">
-    {/*  Header Start */}
-    <MyHeader></MyHeader>
-    {/*  Header End */}
-    <div className="container-fluid">
-      {/* <div className="row">
+    <div
+    className={`page-wrapper ${miniSidebar ? "mini-sidebar" : ""} ${
+      showSidebar ? "show-sidebar" : ""
+    }`}
+    id="main-wrapper"
+    data-layout="vertical"
+    data-navbarbg="skin6"
+    data-sidebartype={sidebarType}
+    data-sidebar-position="fixed"
+    data-header-position="fixed"
+    >
+      {/* Sidebar Start */}
+      <LeftSidebar onSidebarToggle={handleSidebarToggle} />
+
+      {/*  Sidebar End */}
+      {/*  Main wrapper */}
+      <div className="body-wrapper">
+        {/*  Header Start */}
+        <MyHeader onSidebarToggle={handleSidebarToggle}></MyHeader>
+
+        {/*  Header End */}
+        <div className="container-fluid">
+          {/* <div className="row">
         <div className="col-lg-8">
           <div className="card">
             <div className="card-body">
@@ -263,11 +309,11 @@ const TempUIManager = () => {
           <p className="mb-0 fs-4">Design and Developed by <a href="https://adminmart.com/" target="_blank" className="pe-1 text-primary text-decoration-underline">AdminMart.com</a>Distributed by <a href="https://themewagon.com/" target="_blank" className="pe-1 text-primary text-decoration-underline">ThemeWagon</a></p>
         </div>
       </div> */}
-      <Outlet></Outlet>
+          <Outlet></Outlet>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-  )
-}
+  );
+};
 
-export default TempUIManager
+export default TempUIManager;

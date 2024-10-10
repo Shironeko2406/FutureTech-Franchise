@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 const HomeManager = () => {
   return (
@@ -69,10 +69,7 @@ const HomeManager = () => {
                       </span>
                     </th>
                     <td>
-                      <a
-                        href="javascript:void(0)"
-                        className="link-primary text-dark fw-medium d-block"
-                      >
+                      <a className="link-primary text-dark fw-medium d-block">
                         /index.html
                       </a>
                     </td>
@@ -86,10 +83,7 @@ const HomeManager = () => {
                       </span>
                     </th>
                     <td>
-                      <a
-                        href="javascript:void(0)"
-                        className="link-primary text-dark fw-medium d-block"
-                      >
+                      <a className="link-primary text-dark fw-medium d-block">
                         /dashboard
                       </a>
                     </td>
@@ -103,10 +97,7 @@ const HomeManager = () => {
                       </span>
                     </th>
                     <td>
-                      <a
-                        href="javascript:void(0)"
-                        className="link-primary text-dark fw-medium d-block"
-                      >
+                      <a className="link-primary text-dark fw-medium d-block">
                         /product-checkout
                       </a>
                     </td>
@@ -120,10 +111,7 @@ const HomeManager = () => {
                       </span>
                     </th>
                     <td>
-                      <a
-                        href="javascript:void(0)"
-                        className="link-primary text-dark fw-medium d-block"
-                      >
+                      <a className="link-primary text-dark fw-medium d-block">
                         /docs
                       </a>
                     </td>
@@ -137,10 +125,7 @@ const HomeManager = () => {
                       </span>
                     </th>
                     <td className="border-0">
-                      <a
-                        href="javascript:void(0)"
-                        className="link-primary text-dark fw-medium d-block"
-                      >
+                      <a className="link-primary text-dark fw-medium d-block">
                         /services
                       </a>
                     </td>
@@ -268,7 +253,7 @@ const HomeManager = () => {
       <div className="col-lg-4">
         <div className="card overflow-hidden hover-img">
           <div className="position-relative">
-            <a href="javascript:void(0)">
+            <a>
               <img
                 src="../assets/images/blog/blog-img1.jpg"
                 className="card-img-top"
@@ -295,7 +280,6 @@ const HomeManager = () => {
             </span>
             <a
               className="d-block my-4 fs-5 text-dark fw-semibold link-primary"
-              href
             >
               As yen tumbles, gadget-loving Japan goes for secondhand iPhones
             </a>
@@ -318,7 +302,7 @@ const HomeManager = () => {
       <div className="col-lg-4">
         <div className="card overflow-hidden hover-img">
           <div className="position-relative">
-            <a href="javascript:void(0)">
+            <a>
               <img
                 src="../assets/images/blog/blog-img2.jpg"
                 className="card-img-top"
@@ -345,7 +329,6 @@ const HomeManager = () => {
             </span>
             <a
               className="d-block my-4 fs-5 text-dark fw-semibold link-primary"
-              href
             >
               Intel loses bid to revive antitrust case against patent foe
               Fortress
@@ -370,7 +353,7 @@ const HomeManager = () => {
       <div className="col-lg-4">
         <div className="card overflow-hidden hover-img">
           <div className="position-relative">
-            <a href="javascript:void(0)">
+            <a>
               <img
                 src="../assets/images/blog/blog-img3.jpg"
                 className="card-img-top"
@@ -397,7 +380,6 @@ const HomeManager = () => {
             </span>
             <a
               className="d-block my-4 fs-5 text-dark fw-semibold link-primary"
-              href
             >
               COVID outbreak deepens as more lockdowns loom in China
             </a>
@@ -422,7 +404,6 @@ const HomeManager = () => {
         <p className="mb-0 fs-4">
           Design and Developed by{" "}
           <a
-            href="https://adminmart.com/"
             target="_blank"
             className="pe-1 text-primary text-decoration-underline"
           >
@@ -430,7 +411,6 @@ const HomeManager = () => {
           </a>
           Distributed by{" "}
           <a
-            href="https://themewagon.com/"
             target="_blank"
             className="pe-1 text-primary text-decoration-underline"
           >
@@ -439,7 +419,7 @@ const HomeManager = () => {
         </p>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default HomeManager
+export default HomeManager;

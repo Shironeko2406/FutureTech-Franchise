@@ -19,6 +19,10 @@ import ConsultationManagement from "./Manager/Page/ConsultationManagement/Consul
 import TempUIStudent from "./Student/TempUI/TempUIStudent";
 import HomeStudent from "./Student/Page/HomeStudent/HomeStudent";
 import CourseDetail from "./Student/Page/CourseDetail/CourseDetail";
+import HomeStudentNoti from "./Student/Page/HomeStudentNoti";
+import TempUIAgencyManager from "./AgencyManager/TempUIAgencyManager/TempUIAgencyManager";
+import HomeAgencyManager from "./AgencyManager/Page/HomeAgencyManager/HomeAgencyManager";
+
 function App() {
   return (
     <BrowserRouter>
@@ -40,9 +44,15 @@ function App() {
             </Route>
           </Route>
 
+          <Route element={<ProtectedRoute requiredRole="AgencyManager" />}>
+            <Route path="agency-manager" element={<TempUIAgencyManager />} >
+              <Route path="" element={<HomeAgencyManager />} />
+            </Route>
+          </Route>
+
           <Route element={<ProtectedRoute requiredRole="Student" />}>
             <Route path="student" element={<TempUIStudent />} >
-
+              <Route path="" element={<HomeStudentNoti />} />
             </Route>
           </Route>
 

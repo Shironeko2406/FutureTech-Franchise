@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import LeftSidebar from "../Components/LeftSidebar";
-import MyHeader from "../Components/MyHeader";
+import MyHeader from "../Component/MyHeader";
 import { Outlet } from "react-router-dom";
+import LeftSidebar from "../Component/LeftSidebar";
 
-const TempUI = () => {
+const TempUIAgencyManager = () => {
   const [sidebarType, setSidebarType] = useState("full");
   const [miniSidebar, setMiniSidebar] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false); // Trạng thái cho show-sidebar
@@ -314,4 +314,4 @@ const TempUI = () => {
   );
 };
 
-export default TempUI;
+export default TempUIAgencyManager;

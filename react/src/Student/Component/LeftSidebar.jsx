@@ -1,18 +1,19 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
-const LeftSidebar = () => {
+const LeftSidebar = ({ onSidebarToggle }) => {
   return (
     <aside className="left-sidebar">
       {/* Sidebar scroll*/}
       <div>
         <div className="brand-logo d-flex align-items-center justify-content-between">
           <NavLink to="/manager" className="text-nowrap logo-img">
-            <img src="/assets/images/logos/logo-light.svg" alt />
+            <img src="/assets/images/logos/logo-light.svg" alt="" />
           </NavLink>
           <div
             className="close-btn d-xl-none d-block sidebartoggler cursor-pointer"
             id="sidebarCollapse"
+            onClick={onSidebarToggle}
           >
             <i className="ti ti-x fs-8" />
           </div>
@@ -195,7 +196,6 @@ const LeftSidebar = () => {
                   Upgrade to pro
                 </h6>
                 <a
-                  href="#"
                   target="_blank"
                   className="btn btn-primary fs-2 fw-semibold lh-sm"
                 >
@@ -205,7 +205,7 @@ const LeftSidebar = () => {
               <div className="unlimited-access-img">
                 <img
                   src="/assets/images/backgrounds/rocket.png"
-                  alt
+                  alt=""
                   className="img-fluid"
                 />
               </div>

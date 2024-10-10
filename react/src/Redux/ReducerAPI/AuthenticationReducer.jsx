@@ -25,15 +25,18 @@ export const LoginActionAsync = (dataLogin) => {
   return async (dispatch) => {
     try {
       const res = await httpClient.post(`/api/v1/auth/login`, dataLogin);
-
-      dispatch(setUserLogin(res.data.userViewModel))
-      setDataJSONStorage(USER_LOGIN, res.data.userViewModel);
-      setDataTextStorage(TOKEN_AUTHOR, res.data.refreshTokenModel.accessToken);
-      setDataTextStorage(REFRESH_TOKEN, res.data.refreshTokenModel.refreshToken);
-      message.success(`${res.message}`);
-
+      if (res.data?.userViewModel) {
+        dispatch(setUserLogin(res.data.userViewModel))
+        setDataJSONStorage(USER_LOGIN, res.data.userViewModel);
+        setDataTextStorage(TOKEN_AUTHOR, res.data.refreshTokenModel.accessToken);
+        setDataTextStorage(REFRESH_TOKEN, res.data.refreshTokenModel.refreshToken);
+        message.success(`${res.message}`);
+      }else{
+        message.error(`${res.message}`)
+      }
     } catch (error) {
       console.error(error);
+      message.error("An error occurred during login, please try again.");
     }
   };
 };
@@ -60,10 +63,10 @@ export const OtpEmailActionAsync = (username) => {
   };
 };
 
-export const ResetPasswordActionAsync = (username, dataResetPassword) => {
+export const ResetPasswordActionAsync = (dataResetPassword) => {
   return async () => {
     try {
-      const res = await httpClient.put(`/api/v1/auth/reset-password/${username}`, dataResetPassword);
+      const res = await httpClient.post(`/api/v1/auth/reset-password`, dataResetPassword);
       if (res.isSuccess && res.data) {
         message.success(`${res.message}`);
         return true;
