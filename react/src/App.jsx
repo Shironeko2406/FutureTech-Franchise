@@ -14,11 +14,11 @@ import ForgotPassword from "./Admin/Page/ForgotPassword/ForgotPassword";
 import ResetPassword from "./Admin/Page/ForgotPassword/ResetPassword";
 import TempUIManager from "./Manager/TempUI/TempUIManager";
 import HomeManager from "./Manager/Page/Home/HomeManager";
+import ClassSchedule from "./Manager/Page/ClassSchedule/ClassSchedule";
 import ConsultationManagement from "./Manager/Page/ConsultationManagement/ConsultationManagement";
 import TempUIStudent from "./Student/TempUI/TempUIStudent";
 import HomeStudent from "./Student/Page/HomeStudent/HomeStudent";
 import CourseDetail from "./Student/Page/CourseDetail/CourseDetail";
-
 function App() {
   return (
     <BrowserRouter>
@@ -41,14 +41,14 @@ function App() {
           </Route>
 
           <Route element={<ProtectedRoute requiredRole="Student" />}>
-            <Route path="student" element={<TempUIStudent/>} >
+            <Route path="student" element={<TempUIStudent />} >
 
             </Route>
           </Route>
-          
-          <Route path="student-page" element={<TempUIStudent/>} >
-            <Route path="" element={<HomeStudent/>} />
-            <Route path="course-detail" element={<CourseDetail/>} />
+
+          <Route path="student-page" element={<TempUIStudent />} >
+            <Route path="" element={<HomeStudent />} />
+            <Route path="course-detail" element={<CourseDetail />} />
 
           </Route>
 
@@ -56,12 +56,13 @@ function App() {
             <Route path="instructor" element={<HomeInstructor />} />
           </Route>
 
-          <Route element={<ProtectedRoute requiredRole="Manager" />}>
-            <Route path="manager" element={<TempUIManager />}>
-              <Route path="" element={<HomeManager />} />
-              <Route path="consult" element={<ConsultationManagement/>} />
-            </Route>
+          {/* <Route element={<ProtectedRoute requiredRole="Manager" />}> */}
+          <Route path="manager" element={<TempUIManager />}>
+            <Route path="" element={<HomeManager />} />
+            <Route path="consult" element={<ConsultationManagement />} />
+            <Route path="class-schedule" element={<ClassSchedule />} />
           </Route>
+          {/* </Route> */}
         </Routes>
       </Provider>
     </BrowserRouter>

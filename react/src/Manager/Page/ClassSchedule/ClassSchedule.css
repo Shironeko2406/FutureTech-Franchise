@@ -1,0 +1,107 @@
+.container {
+  padding: 16px;
+}
+
+.selectors {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.selector {
+  display: flex;
+  flex-direction: column;
+}
+
+.selector label {
+  font-weight: 500;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.schedule-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid #f0f0f0;
+}
+
+
+.schedule-table th,
+.schedule-table td {
+  border: 1px solid #f0f0f0;
+  padding: 16px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.schedule-table th {
+  background-color: #fafafa;
+  font-weight: normal;
+  height: auto;
+}
+
+.day-header {
+  color: rgba(0, 0, 0, 0.45);
+  font-size: 14px;
+  line-height: 1.5715;
+}
+
+.slot-cell {
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.85);
+  white-space: nowrap; /* Giữ nội dung trên cùng một dòng */
+}
+
+.course-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.course-item {
+  background-color: #e6f7ff;
+  padding: 4px 8px;
+  border-radius: 2px;
+  font-size: 14px;
+  line-height: 1.5715;
+  color: rgba(0, 0, 0, 0.65);
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Thêm dấu ba chấm nếu nội dung quá dài */
+  margin-bottom: 4px; /* Thêm khoảng cách giữa các khoá học */
+}
+
+.day-header {
+  color: rgba(0, 0, 0, 0.85);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.5715;
+}
+
+/* Ant Design overrides */
+.ant-select-selector {
+  border-radius: 2px !important;
+}
+
+.ant-card {
+  border-radius: 2px !important;
+}
+
+.ant-tooltip-inner {
+  border-radius: 2px !important;
+}
+
+.schedule-table td {
+  position: relative;
+  vertical-align: top;
+  padding: 16px;
+  text-align: left;
+  max-height: 150px; /* Giới hạn chiều cao của các ô */
+  overflow-y: auto; /* Thêm thanh cuộn nếu có quá nhiều nội dung */
+}
