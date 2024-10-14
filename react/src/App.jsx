@@ -47,6 +47,7 @@ function App() {
           <Route element={<ProtectedRoute requiredRole="AgencyManager" />}>
             <Route path="agency-manager" element={<TempUIAgencyManager />} >
               <Route path="" element={<HomeAgencyManager />} />
+              <Route path="class-schedule" element={<ClassSchedule />} />
             </Route>
           </Route>
 
@@ -66,13 +67,12 @@ function App() {
             <Route path="instructor" element={<HomeInstructor />} />
           </Route>
 
-          {/* <Route element={<ProtectedRoute requiredRole="Manager" />}> */}
-          <Route path="manager" element={<TempUIManager />}>
-            <Route path="" element={<HomeManager />} />
-            <Route path="consult" element={<ConsultationManagement />} />
-            <Route path="class-schedule" element={<ClassSchedule />} />
+          <Route element={<ProtectedRoute requiredRole="Manager" />}>
+            <Route path="manager" element={<TempUIManager />}>
+              <Route path="" element={<HomeManager />} />
+              <Route path="consult" element={<ConsultationManagement />} />
+            </Route>
           </Route>
-          {/* </Route> */}
         </Routes>
       </Provider>
     </BrowserRouter>
