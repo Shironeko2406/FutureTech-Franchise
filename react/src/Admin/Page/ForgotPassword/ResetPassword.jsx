@@ -353,33 +353,33 @@ const ResetPassword = () => {
                       rules={[
                         {
                           required: true,
-                          message: "Please input your new password",
+                          message: "Vui lòng nhập mật khẩu mới!",
                         },
                         {
                           min: 6,
                           message:
-                            "Password must be at least 6 characters long!",
+                            "Mật khẩu phải có ít nhất 6 ký tự!",
                         },
                         {
                           pattern: /^(?=.*[a-zA-Z])(?=.*\d).+$/,
                           message:
-                            "Your password must contain at least one letter and one number!",
+                            "Mật khẩu phải có ít nhất một ký tự chữ và số!",
                         },
                       ]}
                     >
                       <StyledInput
                         type="password"
-                        placeholder="Enter your new password"
+                        placeholder="Nhập mật khẩu mới"
                       />
                     </Form.Item>
                     <Form.Item
                       name="confirmPassword"
-                      label={<StyledLabel>Nhập lại mật khẩu</StyledLabel>}
+                      label={<StyledLabel>Xác nhận mật khẩu mới</StyledLabel>}
                       style={{ marginBottom: "16px" }}
                       rules={[
                         {
                           required: true,
-                          message: "Please input confirm password",
+                          message: "Vui lòng xác nhận mật khẩu mới!",
                         },
                         {
                           validator: (_, value) => {
@@ -391,7 +391,7 @@ const ResetPassword = () => {
                             }
                             return Promise.reject(
                               new Error(
-                                "Your password confirmation does not match!"
+                                "Hai mật khẩu bạn đã nhập không khớp!"
                               )
                             );
                           },
@@ -400,7 +400,7 @@ const ResetPassword = () => {
                     >
                       <StyledInput
                         type="password"
-                        placeholder="Enter confirm password"
+                        placeholder="Xác nhận mật khẩu mới"
                       />
                     </Form.Item>
                     <Form.Item
@@ -410,7 +410,7 @@ const ResetPassword = () => {
                       rules={[
                         {
                           required: true,
-                          message: "Please enter OTP Number",
+                          message: "Vui lòng nhập mã OTP",
                         },
                       ]}
                     >
@@ -444,14 +444,14 @@ const ResetPassword = () => {
                             navigate("/");
                           }}
                         >
-                          Back to Login
+                          Hủy
                         </Button>
                         <Button
                           type="link"
                           onClick={handleResendOTP}
                           disabled={isCountdownActive}
                         >
-                          Resend OTP{" "}
+                          Gửi lại mã OTP{" "}
                           {isCountdownActive ? `(${countdown}s)` : ""}
                         </Button>
                       </Space>

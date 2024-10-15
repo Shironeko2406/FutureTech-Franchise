@@ -25,6 +25,7 @@ import HomeAgencyManager from "./AgencyManager/Page/HomeAgencyManager/HomeAgency
 import CourseManager from "./Manager/Page/Course/CourseManager";
 import CourseAdmin from "./Admin/Page/Course/CourseAdmin";
 import SlotManager from "./Manager/Page/Slot/SlotManager";
+import ChangePassword from "./Student/Page/ChangePassword/ChangePassword";
 
 function App() {
   return (
@@ -58,6 +59,7 @@ function App() {
           <Route element={<ProtectedRoute requiredRole="Student" />}>
             <Route path="student" element={<TempUIStudent />} >
               <Route path="" element={<HomeStudentNoti />} />
+              <Route path="change-password" element={<ChangePassword />} />
             </Route>
           </Route>
 

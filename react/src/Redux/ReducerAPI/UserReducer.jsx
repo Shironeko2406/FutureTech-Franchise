@@ -58,3 +58,27 @@ export const CreateUserUploadFileActionAsync = (file) => {
     }
   };
 };
+
+export const ChangePasswordActionAsync = (passwordData) => {
+  return async (dispatch) => {
+    try {
+      // Gọi API đổi mật khẩu
+      console.log(passwordData);
+      const res = await httpClient.post(`/api/v1/users/change-password`, passwordData);
+
+      if (res.isSuccess && res.data) {
+        message.success(`${res.message}`);
+        return true;
+      } else if (res.isSuccess && !res.data) {
+        message.error(`${res.message}`);
+        return false;
+      } else {
+        throw new Error(`${res.message}`);
+      }
+    } catch (error) {
+      console.error(error);
+      message.error("Đã xảy ra lỗi, vui lòng thử lại sau.");
+      return false;
+    }
+  };
+};
