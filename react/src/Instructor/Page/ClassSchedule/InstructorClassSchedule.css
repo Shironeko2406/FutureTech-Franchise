@@ -1,0 +1,98 @@
+.instructor-container {
+    padding: 16px;
+}
+
+.instructor-selectors {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.instructor-schedule-table {
+    border: 1px solid #e8e8e8;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.instructor-schedule-table .ant-table-thead>tr>th {
+    background-color: #f0f2f5;
+    text-align: center;
+    font-weight: bold;
+    border-bottom: 2px solid #e8e8e8;
+    padding: 16px 8px;
+}
+
+.instructor-schedule-table .ant-table-tbody>tr>td {
+    padding: 12px 8px;
+    vertical-align: top;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.instructor-schedule-table .ant-table-tbody>tr:last-child>td {
+    border-bottom: none;
+}
+
+.instructor-schedule-table .ant-table-tbody>tr:hover>td {
+    background-color: #f5f5f5;
+}
+
+.instructor-slot-cell {
+    text-align: center;
+    font-weight: bold;
+}
+
+.instructor-day-header {
+    text-align: center;
+}
+
+.instructor-class-cell {
+    background-color: #e6f7ff;
+    border: 1px solid #91d5ff;
+    border-radius: 4px;
+    padding: 8px;
+    height: 100%;
+    transition: all 0.3s ease;
+}
+
+.instructor-class-cell:hover {
+    transform: scale(1.02);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.instructor-class-name {
+    font-weight: bold;
+    color: #1890ff;
+    margin-bottom: 4px;
+}
+
+.instructor-class-info {
+    font-size: 0.9em;
+    color: #555;
+    margin-bottom: 2px;
+}
+
+.instructor-class-time {
+    font-size: 0.9em;
+    color: #1890ff;
+    font-weight: bold;
+    margin-top: 4px;
+}
+
+@media (max-width: 768px) {
+
+    .instructor-schedule-table .ant-table-thead>tr>th,
+    .instructor-schedule-table .ant-table-tbody>tr>td {
+        padding: 8px 4px;
+        font-size: 0.9em;
+    }
+
+    .instructor-class-cell {
+        padding: 4px;
+    }
+
+    .instructor-class-info,
+    .instructor-class-time {
+        font-size: 0.8em;
+    }
+}

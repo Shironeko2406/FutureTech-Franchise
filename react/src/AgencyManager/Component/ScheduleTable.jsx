@@ -19,14 +19,14 @@ export default function ScheduleTable() {
     })
 
     return (
-        <div className="table-container">
-            <table className="schedule-table">
+        <div className="agency-manager-table-container">
+            <table className="agency-manager-schedule-table">
                 <thead>
                     <tr>
                         <th></th>
                         {weekDates.map((date, index) => (
                             <th key={index}>
-                                <div className="day-header">
+                                <div className="agency-manager-day-header">
                                     {daysOfWeek[index]}
                                     <br />
                                     {format(date, 'dd/MM')}
@@ -38,11 +38,11 @@ export default function ScheduleTable() {
                 <tbody>
                     {slots.map((slot) => (
                         <tr key={slot}>
-                            <td className="slot-cell">{slot}</td>
+                            <td className="agency-manager-slot-cell">{slot}</td>
                             {weekDates.map((_, dayIndex) => {
                                 const slotCourses = filteredCourses.filter(c => c.slot === parseInt(slot.split(' ')[1]) && c.day === dayIndex)
                                 return (
-                                    <td key={dayIndex} className="course-cell">
+                                    <td key={dayIndex} className="agency-manager-course-cell">
                                         {slotCourses.map((course) => (
                                             <Tooltip
                                                 key={course.id}
@@ -55,7 +55,7 @@ export default function ScheduleTable() {
                                                     </div>
                                                 }
                                             >
-                                                <div className="course-item">
+                                                <div className="agency-manager-course-item">
                                                     {course.code} - {course.location}
                                                 </div>
                                             </Tooltip>

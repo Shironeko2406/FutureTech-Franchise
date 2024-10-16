@@ -8,7 +8,7 @@ export default function ScheduleHeader() {
     const { selectedYear, selectedWeek, selectedCourse, selectedInstructor, years, weeks, courseOptions, instructorOptions } = useSelector((state) => state.ClassScheduleReducer)
 
     return (
-        <div className="selectors">
+        <div className="agency-manager-selectors">
             <Select
                 value={selectedYear}
                 onChange={(value) => dispatch(setYear(value))}

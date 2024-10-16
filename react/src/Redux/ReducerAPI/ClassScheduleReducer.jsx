@@ -121,6 +121,9 @@ export const fetchWeekData = () => async (dispatch, getState) => {
             { id: "2", code: "MAT201", name: "Linear Algebra", location: "Room B202", instructor: "Prof. Johnson", slot: 2, day: 3 },
             { id: "2", code: "MAT201", name: "Linear Algebra", location: "Room B202", instructor: "Prof. Johnson", slot: 2, day: 4 },
             { id: "2", code: "MAT201", name: "Linear Algebra", location: "Room B202", instructor: "Prof. Johnson", slot: 2, day: 5 },
+            { id: "2", code: "MAT201", name: "Linear Algebra", location: "Room B202", instructor: "Prof. Johnson", slot: 2, day: 5 },
+            { id: "2", code: "MAT201", name: "Linear Algebra", location: "Room B202", instructor: "Prof. Johnson", slot: 2, day: 5 },
+            // { id: "2", code: "MAT201", name: "Linear Algebra", location: "Room B202", instructor: "Prof. Johnson", slot: 2, day: 6 },
             // ... other courses
         ]
         const weekData = {

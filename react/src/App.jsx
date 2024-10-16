@@ -26,6 +26,9 @@ import CourseManager from "./Manager/Page/Course/CourseManager";
 import CourseAdmin from "./Admin/Page/Course/CourseAdmin";
 import SlotManager from "./Manager/Page/Slot/SlotManager";
 import ChangePassword from "./Student/Page/ChangePassword/ChangePassword";
+import StudentClassSchedule from "./Student/Page/ClassSchedule/StudentClassSchedule";
+import TempUIInstructor from "./Instructor/TempUI/TempUIInstructor";
+import InstructorClassSchedule from "./Instructor/Page/ClassSchedule/InstructorClassSchedule";
 
 function App() {
   return (
@@ -56,12 +59,13 @@ function App() {
           </Route>
           {/* </Route> */}
 
-          <Route element={<ProtectedRoute requiredRole="Student" />}>
-            <Route path="student" element={<TempUIStudent />} >
-              <Route path="" element={<HomeStudentNoti />} />
-              <Route path="change-password" element={<ChangePassword />} />
-            </Route>
+          {/* <Route element={<ProtectedRoute requiredRole="Student" />}> */}
+          <Route path="student" element={<TempUIStudent />} >
+            <Route path="" element={<HomeStudentNoti />} />
+            <Route path="change-password" element={<ChangePassword />} />
+            <Route path="class-schedule" element={<StudentClassSchedule />} />
           </Route>
+          {/* </Route> */}
 
           <Route path="student-page" element={<TempUIStudent />} >
             <Route path="" element={<HomeStudent />} />
@@ -69,9 +73,12 @@ function App() {
 
           </Route>
 
-          <Route element={<ProtectedRoute requiredRole="Instructor" />}>
-            <Route path="instructor" element={<HomeInstructor />} />
+          {/* <Route element={<ProtectedRoute requiredRole="Instructor" />}> */}
+          <Route path="instructor" element={<TempUIInstructor />}>
+            <Route path="" element={<HomeInstructor />} />
+            <Route path="class-schedule" element={<InstructorClassSchedule />} />
           </Route>
+          {/* </Route> */}
 
           <Route element={<ProtectedRoute requiredRole="Manager" />}>
             <Route path="manager" element={<TempUIManager />}>

@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { fetchWeekData } from '../../../Redux/ReducerAPI/ClassScheduleReducer'
 import ScheduleHeader from '../../Component/ScheduleHeader'
 import ScheduleTable from '../../Component/ScheduleTable'
-import AddClassModal from '../../Component/AddClassModal'
+import AddClassModal from '../../Modal/AddClassModal'
 import './ClassSchedule.css'
 
 export default function ClassSchedule() {
@@ -20,7 +20,7 @@ export default function ClassSchedule() {
   }
 
   return (
-    <div className="container">
+    <div className="agency-manager-container">
       <Card>
         <ScheduleHeader />
         <ScheduleTable />

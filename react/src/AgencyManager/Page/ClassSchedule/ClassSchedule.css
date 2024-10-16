@@ -1,107 +1,133 @@
-.container {
+.agency-manager-container {
   padding: 16px;
 }
 
-.selectors {
+.agency-manager-selectors {
   display: flex;
   gap: 16px;
   margin-bottom: 16px;
 }
 
-.selector {
-  display: flex;
-  flex-direction: column;
-}
-
-.selector label {
-  font-weight: 500;
-  margin-bottom: 8px;
-  font-size: 14px;
-  color: rgba(0, 0, 0, 0.85);
-}
-
-.table-container {
+.agency-manager-table-container {
   overflow-x: auto;
 }
 
-.schedule-table {
+.agency-manager-schedule-table {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
-  border: 1px solid #f0f0f0;
+  border: 1px solid #e8e8e8;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  box-sizing: border-box;
 }
 
-
-.schedule-table th,
-.schedule-table td {
-  border: 1px solid #f0f0f0;
-  padding: 16px;
+.agency-manager-schedule-table th,
+.agency-manager-schedule-table td {
+  border: 1px solid rgba(232, 232, 232, 0.5);
+  padding: 12px 8px;
   text-align: left;
-  vertical-align: top;
 }
 
-.schedule-table th {
-  background-color: #fafafa;
-  font-weight: normal;
-  height: auto;
-}
-
-.day-header {
-  color: rgba(0, 0, 0, 0.45);
-  font-size: 14px;
-  line-height: 1.5715;
-}
-
-.slot-cell {
-  font-weight: 500;
+.agency-manager-schedule-table th {
+  background-color: #f0f2f5;
+  font-weight: bold;
   color: rgba(0, 0, 0, 0.85);
-  white-space: nowrap; /* Giữ nội dung trên cùng một dòng */
+  white-space: nowrap;
+  text-align: center;
 }
 
-.course-list {
-  display: flex;
-  flex-direction: column;
+.agency-manager-schedule-table td {
+  background-color: #fff;
 }
 
-.course-item {
-  background-color: #e6f7ff;
-  padding: 4px 8px;
-  border-radius: 2px;
+.agency-manager-schedule-table tr:last-child td {
+  border-bottom: none;
+}
+
+.agency-manager-schedule-table tr:hover td {
+  background-color: #f5f5f5;
+}
+
+.agency-manager-day-header {
+  color: rgba(0, 0, 0, 0.85);
+  font-weight: bold;
   font-size: 14px;
   line-height: 1.5715;
-  color: rgba(0, 0, 0, 0.65);
+  text-align: center;
+}
+
+.agency-manager-slot-cell {
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.85);
+  white-space: nowrap;
+  text-align: center;
+}
+
+.agency-manager-course-cell {
+  height: 80px;
+  min-width: 120px;
+}
+
+.agency-manager-course-item {
+  background-color: #91d5ff;
+  padding: 8px;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgb(0, 0, 0);
   cursor: pointer;
+  margin-bottom: 4px;
+  transition: all 0.3s ease;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis; /* Thêm dấu ba chấm nếu nội dung quá dài */
-  margin-bottom: 4px; /* Thêm khoảng cách giữa các khoá học */
+  text-overflow: ellipsis;
 }
 
-.day-header {
-  color: rgba(0, 0, 0, 0.85);
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 1.5715;
+.agency-manager-course-item:hover {
+  background-color: #bae7ff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
-/* Ant Design overrides */
-.ant-select-selector {
-  border-radius: 2px !important;
-}
-
-.ant-card {
-  border-radius: 2px !important;
-}
-
+/* Tooltip styles */
 .ant-tooltip-inner {
-  border-radius: 2px !important;
+  background-color: #f0f9ff !important;
+  color: rgba(0, 0, 0, 0.85);
+  border-radius: 8px !important;
+  border: 1px solid #91d5ff;
+  box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
 }
 
-.schedule-table td {
-  position: relative;
-  vertical-align: top;
-  padding: 16px;
-  text-align: left;
-  max-height: 150px; /* Giới hạn chiều cao của các ô */
-  overflow-y: auto; /* Thêm thanh cuộn nếu có quá nhiều nội dung */
+.tooltip-content {
+  padding: 8px;
+}
+
+.tooltip-content p {
+  margin: 0;
+  line-height: 1;
+}
+
+.ant-tooltip-inner p {
+  color: rgba(0, 0, 0, 0.85) !important;
+  /* Ensure text color is applied */
+}
+
+.ant-tooltip-inner strong {
+  font-weight: 500 !important;
+  color: #1890ff !important;
+  /* Blue color for strong text */
+}
+
+@media (max-width: 768px) {
+
+  .agency-manager-schedule-table th,
+  .agency-manager-schedule-table td {
+    padding: 8px 4px;
+    font-size: 0.9em;
+  }
+
+  .agency-manager-course-item {
+    padding: 4px;
+  }
 }
