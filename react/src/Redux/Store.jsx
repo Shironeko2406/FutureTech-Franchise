@@ -8,15 +8,14 @@ import NotificationReducer from "./ReducerAPI/NotificationReducer";
 import SlotReducer from "./ReducerAPI/SlotReducer";
 
 export const store = configureStore({
-    reducer: {
-      number: (state = 1) => state,
-      AuthenticationReducer,
-      ConsultationReducer,
-      UserReducer,
-      ClassScheduleReducer,
-      CourseCategoryReducer,
-      NotificationReducer,
-      SlotReducer,
-    },
-  });
-  
+  reducer: {
+    number: (state = 1) => state,
+    AuthenticationReducer,
+    ConsultationReducer,
+    UserReducer,
+    ClassScheduleReducer,
+    CourseCategoryReducer,
+    NotificationReducer,
+    SlotReducer,
+  },
+});
