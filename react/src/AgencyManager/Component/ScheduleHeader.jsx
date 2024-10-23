@@ -33,9 +33,6 @@ export default function ScheduleHeader() {
                 options={[{ value: '', label: 'All Instructors' }, ...instructorOptions]}
                 style={{ width: 200 }}
             />
-            <Button type="primary" onClick={() => dispatch(showModal())}>
-                Thêm lịch học
-            </Button>
         </div>
     )
 }

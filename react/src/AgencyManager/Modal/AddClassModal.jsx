@@ -1,108 +1,91 @@
-import React from 'react'
-import { Modal, Form, Select, Button, Row, Col, message } from 'antd'
-import { useSelector, useDispatch } from 'react-redux'
-import { hideModal, setNewClass, addSlot, removeSlot, saveNewClass } from '../../Redux/ReducerAPI/ClassScheduleReducer'
+import React from 'react';
+import { Modal, Form, Select, Button, Space } from 'antd';
+import { PlusOutlined, MinusCircleOutlined } from '@ant-design/icons';
 
-const slots = Array.from({ length: 8 }, (_, i) => `Slot ${i + 1}`)
-const daysOfWeek = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN']
+const { Option } = Select;
 
-export default function AddClassModal() {
-    const dispatch = useDispatch()
-    const { isModalVisible, newClass, availableClasses } = useSelector((state) => state.ClassScheduleReducer)
-    const [form] = Form.useForm()
+const AddClassModal = ({ visible, onCancel, onOk }) => {
+    const [form] = Form.useForm();
 
-    const handleInputChange = (value, field, index = null) => {
-        dispatch(setNewClass({ value, field, index }))
-    }
-
-    const handleAddSlot = () => {
-        if (newClass.slots.length < 5) {
-            dispatch(addSlot())
-        } else {
-            message.warning('Bạn chỉ có thể thêm tối đa 5 slot học.')
-        }
-    }
-
-    const handleSave = () => {
-        form.validateFields().then(() => {
-            // Check for duplicate slots
-            const slotSet = new Set()
-            for (let slot of newClass.slots) {
-                const slotKey = `${slot.slot}-${slot.day}`
-                if (slotSet.has(slotKey)) {
-                    message.error('Các slot học không được trùng nhau.')
-                    return
-                }
-                slotSet.add(slotKey)
-            }
-            dispatch(saveNewClass())
-        }).catch((errorInfo) => {
-            console.log('Validation failed:', errorInfo)
-        })
-    }
+    const onFinish = (values) => {
+        onOk(values);
+        form.resetFields();
+    };
 
     return (
         <Modal
             title="Thêm lịch học"
-            visible={isModalVisible}
-            onOk={handleSave}
-            onCancel={() => dispatch(hideModal())}
+            open={visible}
+            onCancel={onCancel}
+            onOk={() => form.submit()}
+            okText="OK"
+            cancelText="Cancel"
         >
-            <Form form={form} layout="vertical">
+            <Form form={form} layout="vertical" onFinish={onFinish}>
                 <Form.Item
-                    name="classId"
+                    name="class"
                     label="Chọn lớp học"
                     rules={[{ required: true, message: 'Vui lòng chọn lớp học' }]}
                 >
-                    <Select
-                        value={newClass.classId}
-                        onChange={(value) => handleInputChange(value, 'classId')}
-                        options={availableClasses.map(cls => ({ value: cls.id, label: cls.name }))}
-                    />
+                    <Select placeholder="Vui lòng chọn lớp học">
+                        <Option value="class1">Class 1</Option>
+                        <Option value="class2">Class 2</Option>
+                        <Option value="class3">Class 3</Option>
+                    </Select>
                 </Form.Item>
 
-                {newClass.slots.map((slot, index) => (
-                    <Row key={index} gutter={16}>
-                        <Col span={12}>
-                            <Form.Item
-                                name={['slots', index, 'slot']}
-                                label={`Slot học ${index + 1}`}
-                                rules={[{ required: true, message: 'Vui lòng chọn slot học' }]}
-                            >
-                                <Select
-                                    value={slot.slot}
-                                    onChange={(value) => handleInputChange(value, 'slot', index)}
-                                    options={slots.map((slot, i) => ({ value: i + 1, label: slot }))}
-                                />
+                <Form.List name="slots">
+                    {(fields, { add, remove }) => (
+                        <>
+                            {fields.map((field, index) => (
+                                <Space key={field.key} style={{ display: 'flex', marginBottom: 8 }} align="baseline">
+                                    <Form.Item
+                                        {...field}
+                                        label={`Slot học ${index + 1}`}
+                                        name={[field.name, 'slot']}
+                                        rules={[{ required: true, message: 'Vui lòng chọn slot học' }]}
+                                    >
+                                        <Select style={{ width: 200 }}>
+                                            <Option value="slot1">Slot 1</Option>
+                                            <Option value="slot2">Slot 2</Option>
+                                            <Option value="slot3">Slot 3</Option>
+                                            <Option value="slot4">Slot 4</Option>
+                                            <Option value="slot5">Slot 5</Option>
+                                            <Option value="slot6">Slot 6</Option>
+                                        </Select>
+                                    </Form.Item>
+                                    <Form.Item
+                                        {...field}
+                                        label="Ngày học"
+                                        name={[field.name, 'day']}
+                                        rules={[{ required: true, message: 'Vui lòng chọn ngày học' }]}
+                                    >
+                                        <Select style={{ width: 200 }}>
+                                            <Option value="MON">MON</Option>
+                                            <Option value="TUE">TUE</Option>
+                                            <Option value="WED">WED</Option>
+                                            <Option value="THU">THU</Option>
+                                            <Option value="FRI">FRI</Option>
+                                            <Option value="SAT">SAT</Option>
+                                            <Option value="SUN">SUN</Option>
+                                        </Select>
+                                    </Form.Item>
+                                    {fields.length > 1 && (
+                                        <MinusCircleOutlined onClick={() => remove(field.name)} />
+                                    )}
+                                </Space>
+                            ))}
+                            <Form.Item>
+                                <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
+                                    Thêm slot học
+                                </Button>
                             </Form.Item>
-                        </Col>
-                        <Col span={12}>
-                            <Form.Item
-                                name={['slots', index, 'day']}
-                                label="Ngày học"
-                                rules={[{ required: true, message: 'Vui lòng chọn ngày học' }]}
-                            >
-                                <Select
-                                    value={slot.day}
-                                    onChange={(value) => handleInputChange(value, 'day', index)}
-                                    options={daysOfWeek.map((day, i) => ({ value: i, label: day }))}
-                                />
-                            </Form.Item>
-                        </Col>
-                        {newClass.slots.length > 1 && (
-                            <Button type="link" onClick={() => dispatch(removeSlot(index))}>
-                                Xóa slot
-                            </Button>
-                        )}
-                    </Row>
-                ))}
-
-                {newClass.slots.length < 5 && (
-                    <Button type="dashed" onClick={handleAddSlot}>
-                        Thêm slot học
-                    </Button>
-                )}
+                        </>
+                    )}
+                </Form.List>
             </Form>
         </Modal>
-    )
-}
+    );
+};
+
+export default AddClassModal;

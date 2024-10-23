@@ -1,5 +1,5 @@
-import React from 'react'
-import { Card } from 'antd'
+import React, { useState } from 'react'
+import { Card, Button } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchWeekData } from '../../../Redux/ReducerAPI/ClassScheduleReducer'
 import ScheduleHeader from '../../Component/ScheduleHeader'
@@ -10,7 +10,13 @@ import './ClassSchedule.css'
 export default function ClassSchedule() {
   const dispatch = useDispatch()
   const { weekData, loading } = useSelector((state) => state.ClassScheduleReducer)
+  const [modalVisible, setModalVisible] = useState(false);
 
+  const handleOk = (values) => {
+    console.log('Received values:', values);
+    setModalVisible(false);
+    // Process the submitted data here
+  };
   React.useEffect(() => {
     dispatch(fetchWeekData())
   }, [dispatch])
@@ -22,10 +28,15 @@ export default function ClassSchedule() {
   return (
     <div className="agency-manager-container">
       <Card>
+        <Button onClick={() => setModalVisible(true)}>Thêm lịch học</Button>
         <ScheduleHeader />
         <ScheduleTable />
-        <AddClassModal />
+        <AddClassModal
+          visible={modalVisible}
+          onCancel={() => setModalVisible(false)}
+          onOk={handleOk} />
       </Card>
+
     </div>
   )
 }
