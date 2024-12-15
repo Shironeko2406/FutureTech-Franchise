@@ -44,6 +44,7 @@ const UserReducer = createSlice({
     setAccounts: (state, action) => {
       state.accounts = action.payload.items;
       state.totalItemsCount = action.payload.totalItemsCount;
+      state.totalPagesCount = action.payload.totalPagesCount;
     }
   },
 });
@@ -214,7 +215,7 @@ export const GetClassOfUserLoginActionAsync = () => {
 export const GetManagerUserAddAppointmentActionAsync = (filter) => {
   return async (dispatch) => {
     try {
-      const res = await httpClient.get(`/manager/api/v1/users`,{
+      const res = await httpClient.get(`/manager/api/v1/users`, {
         params: {
           StartTime: filter.startTimeFilter,
           EndTime: filter.endTimeFilter,
@@ -483,7 +484,7 @@ export const UpdateUserAccountByLoginActionAsync = (dataUpdate) => {
           dispatch(setUserLogin(updatedUser))
         ]);
         setDataJSONStorage(USER_LOGIN, updatedUser)
-        message.success(`${res.message}`);      
+        message.success(`${res.message}`);
         return true;
       } else if (res.isSuccess && !res.data) {
         message.error(`${res.message}`);
