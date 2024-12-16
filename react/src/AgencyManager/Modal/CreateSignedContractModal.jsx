@@ -100,32 +100,39 @@ const CreateSignedContractModal = ({ visible, onClose, filters, pageIndex, pageS
             onCancel={onClose}
             width={700}
             footer={[
-                contractDetail?.paidAmount < requiredPayment && ( // Kiểm tra điều kiện
-                    <Button
-                        key="paymentContract"
-                        icon={<CreditCardOutlined />}
-                        type="primary"
-                        onClick={handlePaymentContract}
-                    >
-                        Tạo thanh toán
-                    </Button>
-                ),
-                <Button key="downloadContract" icon={<DownloadOutlined />} onClick={downloadSampleContract} type="primary">
-                    Tải file hợp đồng
-                </Button>,
-                <Button key="back" onClick={onClose}>
-                    Hủy
-                </Button>,
-                <Button key="submit" type="primary" onClick={() => form.submit()}>
-                    Nộp hợp đồng
-                </Button>,
+                <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
+                    <div style={{ display: 'flex', gap: '10px' }}>
+                        <Button key="downloadContract" icon={<DownloadOutlined />} onClick={downloadSampleContract} type="primary">
+                            Tải hợp đồng trung tâm gửi
+                        </Button>
+                        {contractDetail?.paidAmount < requiredPayment && ( // Kiểm tra điều kiện
+                            <Button
+                                key="paymentContract"
+                                icon={<CreditCardOutlined />}
+                                type="primary"
+                                onClick={handlePaymentContract}
+                            >
+                                Tạo thanh toán
+                            </Button>
+                        )}
+                    </div>
+                    <div style={{ display: 'flex', gap: '10px' }}>
+                        <Button key="back" onClick={onClose}>
+                            Hủy
+                        </Button>
+                        <Button key="submit" type="primary" onClick={() => form.submit()}>
+                            Nộp hợp đồng
+                        </Button>
+                    </div>
+                </div>
             ]}
 
         >
             <Form form={form} layout="vertical" onFinish={handleSubmit}>
                 <Form.Item
                     name="contractDocumentImageURL"
-                    label={'File đính kèm'}
+                    label={'File hợp đồng đã ký'}
+                    rules={[{ required: true, message: 'Vui lòng thêm file hợp đồng đã ký' }]}
                 >
                     <Upload
                         name="reportFile"
@@ -133,7 +140,6 @@ const CreateSignedContractModal = ({ visible, onClose, filters, pageIndex, pageS
                         onRemove={handleRemoveFile}
                         accept="*"
                         maxCount={1}
-                        rules={[{ required: true, message: 'Vui lòng upload file' }]}
                     >
                         <Button icon={<UploadOutlined />}>Thêm file</Button>
                     </Upload>

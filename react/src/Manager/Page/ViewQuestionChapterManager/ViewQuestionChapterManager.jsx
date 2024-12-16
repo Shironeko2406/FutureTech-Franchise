@@ -25,7 +25,7 @@ const ViewQuestionChapterManager = () => {
   useEffect(() => {
     setLoading(true);
     dispatch(GetQuestionBankByChapterId(chapterId)).finally(() => setLoading(false));
-  },[chapterId])
+  }, [chapterId])
 
   const handleDeleteQuestion = async (questionId) => {
     setLoading(true);
@@ -43,7 +43,7 @@ const ViewQuestionChapterManager = () => {
   const closeModalCreate = () => {
     setIsModalCreateVisible(false);
   };
-  
+
   const showModalEdit = (question) => {
     setIsModalEditVisible(true);
     setSelectedQuestion(question)
@@ -59,9 +59,9 @@ const ViewQuestionChapterManager = () => {
       <Space direction="vertical" size="large" style={{ width: '100%' }}>
         <div className="flex justify-between items-center">
           <Title level={3}><CalendarOutlined /> Quản lý câu hỏi</Title>
-          <Button type="primary" icon={<PlusOutlined />} onClick={showModalCreate}>
+          {/* <Button type="primary" icon={<PlusOutlined />} onClick={showModalCreate}>
             Thêm câu hỏi mới
-          </Button>
+          </Button> */}
         </div>
         <List
           grid={{ gutter: 16, column: 1 }}
@@ -70,23 +70,23 @@ const ViewQuestionChapterManager = () => {
             <List.Item>
               <Card
                 title={<Text strong>{question.description}</Text>}
-                extra={
-                  <Space>
-                    <Button icon={<EditOutlined />} onClick={() => showModalEdit(question)}>
-                      Cập nhật
-                    </Button>
-                    <Popconfirm
-                        title="Bạn có chắc chắn muốn xóa câu hỏi này?"
-                        onConfirm={() => handleDeleteQuestion(question.id)} // Khi xác nhận, gọi hàm xóa
-                        okText="Xóa"
-                        cancelText="Hủy"
-                    >
-                        <Button icon={<DeleteOutlined />} danger>
-                        Xóa
-                        </Button>
-                    </Popconfirm>
-                  </Space>
-                }
+              // extra={
+              //   <Space>
+              //     <Button icon={<EditOutlined />} onClick={() => showModalEdit(question)}>
+              //       Cập nhật
+              //     </Button>
+              //     <Popconfirm
+              //       title="Bạn có chắc chắn muốn xóa câu hỏi này?"
+              //       onConfirm={() => handleDeleteQuestion(question.id)} // Khi xác nhận, gọi hàm xóa
+              //       okText="Xóa"
+              //       cancelText="Hủy"
+              //     >
+              //       <Button icon={<DeleteOutlined />} danger>
+              //         Xóa
+              //       </Button>
+              //     </Popconfirm>
+              //   </Space>
+              // }
               >
                 {question.imageURL && (
                   <Image

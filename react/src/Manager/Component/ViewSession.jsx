@@ -49,11 +49,11 @@ const ViewSession = () => {
       <div className="card-body">
         <div className="d-flex justify-content-between align-items-center mb-3">
           <h5 className="card-title">Chi tiết các buổi học</h5>
-          {sessions.length > 0 ? ( // Kiểm tra nếu có chapters
+          {/* {sessions.length > 0 ? ( // Kiểm tra nếu có chapters
             <button className="btn btn-warning" onClick={showDrawer}>Sửa buổi học</button>
           ) : (
             <button className="btn btn-primary" onClick={showDrawer}>Thêm buổi học</button>
-          )}
+          )} */}
         </div>
         {/* Bảng hiển thị session */}
         <Table

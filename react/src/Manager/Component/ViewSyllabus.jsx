@@ -36,7 +36,7 @@ const ViewSyllabus = () => {
       <div className="card-body">
         <div className="d-flex justify-content-between align-items-center mb-3">
           <h5 className="card-title">Chi tiết giáo trình</h5>
-          {courseById?.syllabus ? (
+          {/* {courseById?.syllabus ? (
             <button
               className="btn btn-warning"
               onClick={() => showModalEditSyllabus(courseById.syllabus)}
@@ -47,7 +47,7 @@ const ViewSyllabus = () => {
             <button className="btn btn-primary" onClick={showDrawer}>
               Thêm giáo trình
             </button>
-          )}
+          )} */}
         </div>
         <div style={{ overflowX: "auto" }}>
           <Descriptions bordered column={1} style={{ minWidth: "600px" }}>

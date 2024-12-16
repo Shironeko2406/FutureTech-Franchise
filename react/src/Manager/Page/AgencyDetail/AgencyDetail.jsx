@@ -499,7 +499,7 @@ export default function AgencyDetail() {
     setLoading(true);
     const res = await dispatch(GetContractDetailByAgencyIdActionAsync(agencyId));
     setLoading(false);
-    if (res.data) {
+    if (res) {
       setModalContractDetailVisible(true);
     } else {
       message.error("Chưa có hợp đồng nào được tạo ra.");

@@ -58,11 +58,11 @@ const ViewAssessment = () => {
       <div className="card-body">
         <div className="d-flex justify-content-between align-items-center mb-3">
           <h5 className="card-title">Chi tiết đánh giá</h5>
-          {assessments.length > 0 ? ( // Kiểm tra nếu có chapters
+          {/* {assessments.length > 0 ? ( // Kiểm tra nếu có chapters
             <button className="btn btn-warning" onClick={showDrawer}>Sửa đánh giá</button>
           ) : (
             <button className="btn btn-primary" onClick={showDrawer}>Thêm đánh giá</button>
-          )}
+          )} */}
         </div>
         {/* Bảng hiển thị assessment */}
         <Table

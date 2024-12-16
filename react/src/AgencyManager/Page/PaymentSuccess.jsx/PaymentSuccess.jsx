@@ -42,22 +42,22 @@ const PaymentSuccess = () => {
           </Paragraph>
         }
         extra={[
-          <Button 
-            key="dashboard" 
+          <Button
+            key="dashboard"
             onClick={handleReturnToDashboard}
           >
             Trở về
           </Button>
         ]}
       >
-        <div style={{ background: '#f0f2f5', padding: '24px', borderRadius: '2px' }}>
+        {/* <div style={{ background: '#f0f2f5', padding: '24px', borderRadius: '2px' }}>
           <Paragraph>
-            <strong>Mã hợp đồng:</strong> {contractId}
+            <strong>Mã hợp đồng:</strong> {contractCode}
           </Paragraph>
           <Paragraph>
             Hợp đồng của bạn đã được kích hoạt. Bạn có thể xem chi tiết hợp đồng bằng cách nhấn vào nút "Xem chi tiết hợp đồng" ở trên.
           </Paragraph>
-        </div>
+        </div> */}
       </Result>
     </Card>
   );

@@ -332,6 +332,7 @@ const ViewTaskDetailModal = ({ visible, onClose, setVisible, isFromAgencyDetail,
               Giá tiền thiết kế: {formatCurrency(taskDetail?.designFee)}
             </Text>
           )}
+          {taskDetail?.reportImageURL && <br />}
           {taskDetail?.reportImageURL && (
             <Button
               type="primary"
@@ -344,7 +345,6 @@ const ViewTaskDetailModal = ({ visible, onClose, setVisible, isFromAgencyDetail,
               Xem tài liệu đính kèm
             </Button>
           )}
-          {taskDetail?.reportImageURL && <br />}
           {taskDetail?.customerSubmit && (taskDetail?.type === 'AgreementSigned' || taskDetail?.type === 'SignedContract') && (
             <Button
               type="primary"

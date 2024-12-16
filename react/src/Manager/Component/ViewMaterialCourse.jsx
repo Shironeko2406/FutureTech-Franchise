@@ -33,7 +33,7 @@ const ViewMaterialCourse = () => {
       <div className="card-body">
         <div className="d-flex justify-content-between align-items-center mb-3">
           <h5 className="card-title">Chi tiết tài nguyên khóa học</h5>
-          <Button type="primary">Thêm tài nguyên</Button>
+          {/* <Button type="primary">Thêm tài nguyên</Button> */}
         </div>
         {/* Bảng hiển thị material */}
         <Table

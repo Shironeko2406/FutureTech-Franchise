@@ -189,9 +189,9 @@ const ViewChapter = () => {
       <div className="card-body">
         <div className="d-flex justify-content-between align-items-center mb-3">
           <h5 className="card-title">Chi tiết các chương</h5>
-          <button className="btn btn-primary" onClick={showDrawer}>
+          {/* <button className="btn btn-primary" onClick={showDrawer}>
             Thêm chương
-          </button>
+          </button> */}
         </div>
         {/* Bảng hiển thị chapter */}
         <Table
@@ -199,10 +199,10 @@ const ViewChapter = () => {
           columns={columns}
           expandable={{
             expandedRowRender,
-            rowExpandable: (record) => record.chapterMaterials.length > 0, 
+            rowExpandable: (record) => record.chapterMaterials.length > 0,
           }}
           dataSource={chapters}
-          rowKey="id" 
+          rowKey="id"
           scroll={{ x: 768 }}
         />
       </div>
@@ -217,7 +217,7 @@ const ViewChapter = () => {
         onClose={closeModalEditChapter}
         chapter={selectedChapter}
       />
-      
+
       <CreateMaterialModal
         visible={isModalCreateMaterialVisible}
         onClose={closeModalCreateMaterialChapter}
