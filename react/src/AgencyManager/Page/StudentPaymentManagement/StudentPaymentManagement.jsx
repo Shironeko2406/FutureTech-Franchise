@@ -4,22 +4,25 @@ import { useDispatch, useSelector } from "react-redux";
 import { SearchOutlined } from "@ant-design/icons";
 import { GetStudentPaymentInfoActionAsync } from "../../../Redux/ReducerAPI/PaymentReducer";
 import moment from "moment";
+import { useLoading } from "../../../Utils/LoadingContext";
 
 const { Text } = Typography;
 
 const StudentPaymentManagement = () => {
     const { paymentInfo, totalPagesCount } = useSelector((state) => state.PaymentReducer);
     const dispatch = useDispatch();
+    const { setLoading } = useLoading();
     const [pageIndex, setPageIndex] = useState(1);
-    const [pageSize, setPageSize] = useState(10); // Kích thước trang mặc định là 10
+    const [pageSize, setPageSize] = useState(10);
     const [searchName, setSearchName] = useState("");
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [selectedImage, setSelectedImage] = useState(null);
-    const [imageLoading, setImageLoading] = useState(false);
+    const [isImageLoading, setIsImageLoading] = useState(false);
 
     useEffect(() => {
-        // Fetch data
-        dispatch(GetStudentPaymentInfoActionAsync(pageIndex, pageSize, searchName));
+        setLoading(true);
+        dispatch(GetStudentPaymentInfoActionAsync(pageIndex, pageSize, searchName))
+            .finally(() => setLoading(false));
     }, [pageIndex, pageSize, searchName, dispatch]);
 
     const handlePageChange = (page, pageSize) => {
@@ -32,12 +35,13 @@ const StudentPaymentManagement = () => {
     };
 
     const handleImageClick = (imageURL) => {
-        setImageLoading(true);
         setSelectedImage(imageURL);
-        setTimeout(() => {
-            setIsModalVisible(true);
-            setImageLoading(false);
-        }, 500); // Simulate loading delay
+        setIsImageLoading(true); // Hiển thị spinner
+        setIsModalVisible(true);
+    };
+
+    const handleImageLoad = () => {
+        setIsImageLoading(false); // Tắt spinner khi ảnh tải xong
     };
 
     const handleModalClose = () => {
@@ -124,8 +128,13 @@ const StudentPaymentManagement = () => {
             title: "Hình ảnh",
             dataIndex: "imageURL",
             key: "imageURL",
-            render: (text) => text ? <Button type="link" onClick={() => handleImageClick(text)}>Xem ảnh</Button> : null,
-        }
+            render: (text) =>
+                text ? (
+                    <Button type="link" onClick={() => handleImageClick(text)}>
+                        Xem ảnh
+                    </Button>
+                ) : null,
+        },
     ];
 
     return (
@@ -162,9 +171,16 @@ const StudentPaymentManagement = () => {
                         footer={null}
                         onCancel={handleModalClose}
                     >
-                        <Spin spinning={imageLoading}>
-                            <img src={selectedImage} alt="Payment" style={{ width: '100%' }} />
-                        </Spin>
+                        {isImageLoading ? (
+                            <Spin tip="Đang tải ảnh..." />
+                        ) : (
+                            <img
+                                src={selectedImage}
+                                alt="ảnh thanh toán"
+                                style={{ width: "100%" }}
+                                onLoad={handleImageLoad}
+                            />
+                        )}
                     </Modal>
                 </div>
             </div>

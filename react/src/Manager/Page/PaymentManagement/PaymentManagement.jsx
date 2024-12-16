@@ -3,18 +3,19 @@ import { Button, Table, Space, Typography, Spin, Modal } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { GetPaymentContractsActionAsync } from "../../../Redux/ReducerAPI/PaymentReducer";
 import moment from "moment";
+import { useLoading } from "../../../Utils/LoadingContext";
 
 const { Text } = Typography;
 
 const PaymentManagement = () => {
     const { paymentInfo, totalPagesCount } = useSelector((state) => state.PaymentReducer);
     const dispatch = useDispatch();
+    const { setLoading } = useLoading();
     const [pageIndex, setPageIndex] = useState(1);
     const [pageSize, setPageSize] = useState(10); // Default page size is 10
-    const [loading, setLoading] = useState(false);
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [selectedImage, setSelectedImage] = useState(null);
-    const [imageLoading, setImageLoading] = useState(false);
+    const [isImageLoading, setIsImageLoading] = useState(false);
 
     useEffect(() => {
         setLoading(true);
@@ -28,12 +29,13 @@ const PaymentManagement = () => {
     };
 
     const handleImageClick = (imageURL) => {
-        setImageLoading(true);
         setSelectedImage(imageURL);
-        setTimeout(() => {
-            setIsModalVisible(true);
-            setImageLoading(false);
-        }, 500); // Simulate loading delay
+        setIsImageLoading(true);
+        setIsModalVisible(true);
+    };
+
+    const handleImageLoad = () => {
+        setIsImageLoading(false);
     };
 
     const handleModalClose = () => {
@@ -177,32 +179,31 @@ const PaymentManagement = () => {
         <div className="card">
             <div className="card-body">
                 <h5 className="card-title mb-3">Lịch sử thanh toán</h5>
-                <Spin spinning={loading}>
-                    <Table
-                        bordered
-                        columns={columns}
-                        dataSource={paymentInfo}
-                        rowKey={(record) => record.id}
-                        pagination={{
-                            current: pageIndex,
-                            pageSize,
-                            total: totalPagesCount * pageSize,
-                            showSizeChanger: true,
-                            pageSizeOptions: ["10", "20", "50"],
-                        }}
-                        onChange={handleTableChange}
-                        loading={loading}
-                        scroll={{ x: 'max-content' }}
-                    />
-                </Spin>
+                <Table
+                    bordered
+                    columns={columns}
+                    dataSource={paymentInfo}
+                    rowKey={(record) => record.id}
+                    pagination={{
+                        current: pageIndex,
+                        pageSize,
+                        total: totalPagesCount * pageSize,
+                        showSizeChanger: true,
+                        pageSizeOptions: ["10", "20", "50"],
+                    }}
+                    onChange={handleTableChange}
+                    scroll={{ x: 'max-content' }}
+                />
                 <Modal
                     open={isModalVisible}
                     footer={null}
                     onCancel={handleModalClose}
                 >
-                    <Spin spinning={imageLoading}>
-                        <img src={selectedImage} alt="Payment" style={{ width: '100%' }} />
-                    </Spin>
+                    {isImageLoading ? (
+                        <Spin tip="Đang tải ảnh..." />
+                    ) : (
+                        <img src={selectedImage} alt="Payment" style={{ width: '100%' }} onLoad={handleImageLoad} />
+                    )}
                 </Modal>
             </div>
         </div>
