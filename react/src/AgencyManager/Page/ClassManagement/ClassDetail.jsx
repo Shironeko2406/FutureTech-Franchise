@@ -4,9 +4,10 @@ import { useParams, useNavigate } from "react-router-dom";
 import { GetClassDetailActionAsync, GetAllInstructorsAvailableActionAsync } from "../../../Redux/ReducerAPI/ClassReducer";
 import { GetSlotActionAsync } from "../../../Redux/ReducerAPI/SlotReducer";
 import { Card, Table, Avatar, Typography, Spin, Row, Col, Tag, Button, Tooltip, Popover } from 'antd';
-import { UserOutlined, BookOutlined, TeamOutlined, CalendarOutlined, ClockCircleOutlined, EditOutlined, TagOutlined, ArrowLeftOutlined, DeleteOutlined } from '@ant-design/icons';
+import { UserOutlined, BookOutlined, TeamOutlined, CalendarOutlined, ClockCircleOutlined, EditOutlined, TagOutlined, ArrowLeftOutlined, DeleteOutlined, SwapOutlined } from '@ant-design/icons';
 import EditClassModal from "../../Modal/EditClassModal";
 import EditScheduleModal from "../../Modal/EditScheduleModal";
+import AddToClassWithoutCreateModal from "../../Modal/AddToClassWithoutCreateModal"; // Import the modal component
 import { RemoveAllSchedulesOfOneClassActionAsync } from "../../../Redux/ReducerAPI/ClassScheduleReducer";
 
 const { Title } = Typography;
@@ -23,6 +24,8 @@ const ClassDetail = () => {
     const [isClassModalVisible, setIsClassModalVisible] = useState(false);
     const [isScheduleModalVisible, setIsScheduleModalVisible] = useState(false);
     const [isStudentsModalVisible, setIsStudentsModalVisible] = useState(false);
+    const [isTransferModalVisible, setIsTransferModalVisible] = useState(false);
+    const [selectedStudentId, setSelectedStudentId] = useState(null);
 
     useEffect(() => {
         dispatch(GetClassDetailActionAsync(id));
@@ -45,6 +48,17 @@ const ClassDetail = () => {
         }).finally(() => {
             setPopoverVisible(false);
         });
+    };
+
+    const handleTransferClick = (studentId) => {
+        setSelectedStudentId(studentId);
+        setIsTransferModalVisible(true);
+    };
+
+    const handleTransferModalClose = () => {
+        setIsTransferModalVisible(false);
+        setSelectedStudentId(null);
+        handleEditSuccess();
     };
 
     const deletePopoverContent = (
@@ -141,6 +155,20 @@ const ClassDetail = () => {
                 >
                     {text}
                 </Tag>
+            ),
+        },
+        {
+            title: 'Thao tác',
+            key: 'action',
+            align: 'center',
+            render: (text, record) => (
+                <Tooltip title="Chuyển lớp">
+                    <Button
+                        type="primary"
+                        icon={<SwapOutlined />}
+                        onClick={() => handleTransferClick(record.userId)}
+                    />
+                </Tooltip>
             ),
         },
     ];
@@ -409,6 +437,15 @@ const ClassDetail = () => {
                 slotData={slotData}
                 classData={classDetail}
                 onUpdateSuccess={handleEditSuccess}
+            />
+
+            {/* Component transfer student */}
+            <AddToClassWithoutCreateModal
+                visible={isTransferModalVisible}
+                onClose={handleTransferModalClose}
+                studentId={selectedStudentId}
+                courseId={classDetail.courseId}
+                isTransfer={true}
             />
 
         </div>

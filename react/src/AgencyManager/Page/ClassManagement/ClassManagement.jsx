@@ -29,7 +29,7 @@ const ClassManagement = () => {
     };
 
     const handleRowClick = (id) => {
-        navigate(`${id}`);
+        navigate(`/agency-manager/classes/${id}`);
     };
 
     const getStatusBadge = (status) => {

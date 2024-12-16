@@ -7,7 +7,7 @@ import moment from 'moment';
 
 const { Title, Text } = Typography;
 
-const AddToClassWithoutCreateModal = ({ visible, onClose, studentId, courseId }) => {
+const AddToClassWithoutCreateModal = ({ visible, onClose, studentId, courseId, isTransfer }) => {
     const dispatch = useDispatch();
     const [selectedClass, setSelectedClass] = useState(null);
     const { setLoading } = useLoading();
@@ -42,7 +42,7 @@ const AddToClassWithoutCreateModal = ({ visible, onClose, studentId, courseId })
     return (
         <Modal
             open={visible}
-            title="Thêm học sinh vào lớp"
+            title={isTransfer ? "Chuyển lớp cho học sinh" : "Thêm học sinh vào lớp"}
             onCancel={onClose}
             footer={[
                 <Button key="back" onClick={onClose}>

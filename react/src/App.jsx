@@ -223,7 +223,7 @@ function App() {
                 <Route path="agency-active/:id" element={<AgencyActiveInfo />} />
                 <Route path="agency-active/:id/task-detail" element={<AgencyActiveDetailTask />} />
                 <Route path="agency" element={<AgencyManagement />} />
-                <Route path="agency/edit/:id" element={<AgencyEdit/>} />
+                <Route path="agency/edit/:id" element={<AgencyEdit />} />
                 <Route path="agency-active" element={<AgencyActiveManagement />} />
                 <Route path="contracts" element={<ManageContractPage />} />
                 <Route path="contract/create" element={<CreateContractPage />} />
