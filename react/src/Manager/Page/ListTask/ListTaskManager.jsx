@@ -517,212 +517,203 @@ const ListTaskManager = () => {
                             Xem tài liệu
                         </Button>
                     );
-                } else if (task.report) {
+                }
+                if (task.submit !== "Submited" && task.status === "None") {
                     actions.push(
                         <Button
                             type="primary"
-                            icon={<EyeOutlined />}
-                            onClick={() => openModalShowReport(task)}
+                            onClick={() => handleUpdateTaskStatus(task)}
                         >
-                            Xem báo cáo
+                            Nộp báo cáo
                         </Button>
                     );
-                    if (task.submit !== "Submited" && task.status === "None") {
-                        actions.push(
-                            <Button
-                                type="primary"
-                                onClick={() => handleUpdateTaskStatus(task)}
-                            >
-                                Nộp báo cáo
-                            </Button>
-                        );
-                    } else if (task.submit === "Submited" && task.status === "None") {
-                        actions.push(
-                            <Button
-                                type="primary"
-                                danger
-                                onClick={() => handleUpdateTaskStatus(task)}
-                            >
-                                Hủy nộp
-                            </Button>
-                        );
-                    }
-                } else {
+                } else if (task.submit === "Submited" && task.status === "None") {
                     actions.push(
                         <Button
                             type="primary"
-                            icon={<UploadOutlined />}
-                            onClick={() => openModalSubmitTaskReport(task)}
+                            danger
+                            onClick={() => handleUpdateTaskStatus(task)}
                         >
-                            Báo cáo
+                            Hủy nộp
                         </Button>
                     );
                 }
-                break;
+        } else {
+            actions.push(
+                <Button
+                    type="primary"
+                    icon={<UploadOutlined />}
+                    onClick={() => openModalSubmitTaskReport(task)}
+                >
+                    Báo cáo
+                </Button>
+            );
+        }
+        break;
             default:
-                if (task.report) {
-                    actions.push(
-                        <Button
-                            type="primary"
-                            icon={<EyeOutlined />}
-                            onClick={() => openModalShowReport(task)}
-                        >
-                            Xem báo cáo
-                        </Button>
-                    );
-                    if (task.submit !== "Submited" && task.status === "None") {
-                        actions.push(
-                            <Button
-                                type="primary"
-                                onClick={() => handleUpdateTaskStatus(task)}
-                            >
-                                Nộp báo cáo
-                            </Button>
-                        );
-                    } else if (task.submit === "Submited" && task.status === "None") {
-                        actions.push(
-                            <Button
-                                type="primary"
-                                danger
-                                onClick={() => handleUpdateTaskStatus(task)}
-                            >
-                                Hủy nộp
-                            </Button>
-                        );
-                    }
-                } else {
-                    actions.push(
-                        <Button
-                            type="primary"
-                            icon={<UploadOutlined />}
-                            onClick={() => openModalSubmitTaskReport(task)}
-                        >
-                            Báo cáo
-                        </Button>
-                    );
-                }
-                break;
+if (task.report) {
+    actions.push(
+        <Button
+            type="primary"
+            icon={<EyeOutlined />}
+            onClick={() => openModalShowReport(task)}
+        >
+            Xem báo cáo
+        </Button>
+    );
+    if (task.submit !== "Submited" && task.status === "None") {
+        actions.push(
+            <Button
+                type="primary"
+                onClick={() => handleUpdateTaskStatus(task)}
+            >
+                Nộp báo cáo
+            </Button>
+        );
+    } else if (task.submit === "Submited" && task.status === "None") {
+        actions.push(
+            <Button
+                type="primary"
+                danger
+                onClick={() => handleUpdateTaskStatus(task)}
+            >
+                Hủy nộp
+            </Button>
+        );
+    }
+} else {
+    actions.push(
+        <Button
+            type="primary"
+            icon={<UploadOutlined />}
+            onClick={() => openModalSubmitTaskReport(task)}
+        >
+            Báo cáo
+        </Button>
+    );
+}
+break;
         }
 
-        return (
-            <TaskItem
-                style={{
-                    backgroundColor: task.level === "Compulsory" ? "#fff1f0" : "#f0f5ff",
-                    marginBottom: "8px",
-                    borderRadius: "8px",
-                    padding: "12px",
-                }}
-                key={task.id}
-                actions={actions}
-            >
-                <List.Item.Meta
-                    avatar={getStatusIcon(task.status)}
-                    title={
-                        <span>
-                            {task.title}
-                            {task.level === "Compulsory" && (
-                                <>
-                                    <FlagOutlined
-                                        style={{ color: "#ff4d4f", marginLeft: "8px" }}
-                                    />
-                                    <Text type="danger" strong style={{ marginLeft: "4px" }}>
-                                        (Quan trọng)
-                                    </Text>
-                                </>
-                            )}
-                        </span>
-                    }
-                    description={
-                        <div>
-                            <StatusTag color={getStatusColor(task.status)}>
-                                {translateStatus(task.status).toUpperCase()}
-                            </StatusTag>
-                            <StatusTag color={getSubmitStatusColor(task.submit)}>
-                                {translateSubmitStatus(task.submit).toUpperCase()}
-                            </StatusTag>
-                            <div
-                                style={{
-                                    display: "flex",
-                                    alignItems: "center",
-                                    marginTop: "4px",
-                                }}
-                            >
-                                <CalendarOutlined style={{ marginRight: "4px" }} />
-                                <Text type="secondary">
-                                    {moment(task.startDate).format("DD/MM/YYYY HH:mm")} -{" "}
-                                    {moment(task.endDate).format("DD/MM/YYYY HH:mm")}
-                                </Text>
-                            </div>
-                            <div
-                                style={{
-                                    marginTop: "8px",
-                                }}
-                            >
-                                <EnvironmentOutlined style={{ marginRight: "4px" }} />
-                                <Text>
-                                    {`${address}, ${ward}, ${district}, ${city}`}
-                                </Text>
-                            </div>
-                            <div
-                                style={{
-                                    marginTop: "4px",
-                                }}
-                            >
-                                <PhoneOutlined style={{ marginRight: "4px" }} />
-                                <Text>{phoneNumber}</Text>
-                            </div>
-                        </div>
-                    }
-                />
-            </TaskItem>
-        );
+return (
+    <TaskItem
+        style={{
+            backgroundColor: task.level === "Compulsory" ? "#fff1f0" : "#f0f5ff",
+            marginBottom: "8px",
+            borderRadius: "8px",
+            padding: "12px",
+        }}
+        key={task.id}
+        actions={actions}
+    >
+        <List.Item.Meta
+            avatar={getStatusIcon(task.status)}
+            title={
+                <span>
+                    {task.title}
+                    {task.level === "Compulsory" && (
+                        <>
+                            <FlagOutlined
+                                style={{ color: "#ff4d4f", marginLeft: "8px" }}
+                            />
+                            <Text type="danger" strong style={{ marginLeft: "4px" }}>
+                                (Quan trọng)
+                            </Text>
+                        </>
+                    )}
+                </span>
+            }
+            description={
+                <div>
+                    <StatusTag color={getStatusColor(task.status)}>
+                        {translateStatus(task.status).toUpperCase()}
+                    </StatusTag>
+                    <StatusTag color={getSubmitStatusColor(task.submit)}>
+                        {translateSubmitStatus(task.submit).toUpperCase()}
+                    </StatusTag>
+                    <div
+                        style={{
+                            display: "flex",
+                            alignItems: "center",
+                            marginTop: "4px",
+                        }}
+                    >
+                        <CalendarOutlined style={{ marginRight: "4px" }} />
+                        <Text type="secondary">
+                            {moment(task.startDate).format("DD/MM/YYYY HH:mm")} -{" "}
+                            {moment(task.endDate).format("DD/MM/YYYY HH:mm")}
+                        </Text>
+                    </div>
+                    <div
+                        style={{
+                            marginTop: "8px",
+                        }}
+                    >
+                        <EnvironmentOutlined style={{ marginRight: "4px" }} />
+                        <Text>
+                            {`${address}, ${ward}, ${district}, ${city}`}
+                        </Text>
+                    </div>
+                    <div
+                        style={{
+                            marginTop: "4px",
+                        }}
+                    >
+                        <PhoneOutlined style={{ marginRight: "4px" }} />
+                        <Text>{phoneNumber}</Text>
+                    </div>
+                </div>
+            }
+        />
+    </TaskItem>
+);
     };
 
-    return (
-        <Card>
-            <Title level={4}>
-                <CalendarOutlined /> Danh sách công việc
-            </Title>
-            <DynamicFilter onFilterChange={handleFilterChange} defaultFilters={filters} />
-            <List
-                dataSource={taskUser}
-                renderItem={renderItem}
-                pagination={{
-                    current: pageIndex,
-                    pageSize,
-                    total: totalPagesCount * pageSize,
-                    onChange: handlePageChange,
-                    showSizeChanger: true,
-                    pageSizeOptions: ['7', '10'],
-                }}
-                style={{ marginTop: '16px' }}
-            />
-            <ViewTaskDetailModal
-                visible={modalShowTaskDetailVisible}
-                onClose={handleCloseModalShowTaskDetail}
-                setVisible={setModalShowTaskDetailVisible}
-                isFromAgencyDetail={false}
-                isFromTaskDetail={true} // Add this line
-            />
-            <SubmitTaskReportModal
-                visible={modalSubmitTaskReportVisible}
-                onClose={handleCloseModalSubmitTaskReport}
-                onSubmit={handleSubmitTaskReport}
-                taskType={taskType}
-                selectedTask={selectedTask}
-            />
-            <ShowReportModal
-                visible={modalShowReportVisible}
-                onClose={handleCloseModalShowReport}
-                taskId={selectedTask?.id}
-                taskType={selectedTask?.type}
-                task={selectedTask}
-                filters={filters}
-                pageIndex={pageIndex}
-                pageSize={pageSize}
-            />
-        </Card>
-    );
+return (
+    <Card>
+        <Title level={4}>
+            <CalendarOutlined /> Danh sách công việc
+        </Title>
+        <DynamicFilter onFilterChange={handleFilterChange} defaultFilters={filters} />
+        <List
+            dataSource={taskUser}
+            renderItem={renderItem}
+            pagination={{
+                current: pageIndex,
+                pageSize,
+                total: totalPagesCount * pageSize,
+                onChange: handlePageChange,
+                showSizeChanger: true,
+                pageSizeOptions: ['7', '10'],
+            }}
+            style={{ marginTop: '16px' }}
+        />
+        <ViewTaskDetailModal
+            visible={modalShowTaskDetailVisible}
+            onClose={handleCloseModalShowTaskDetail}
+            setVisible={setModalShowTaskDetailVisible}
+            isFromAgencyDetail={false}
+            isFromTaskDetail={true} // Add this line
+        />
+        <SubmitTaskReportModal
+            visible={modalSubmitTaskReportVisible}
+            onClose={handleCloseModalSubmitTaskReport}
+            onSubmit={handleSubmitTaskReport}
+            taskType={taskType}
+            selectedTask={selectedTask}
+        />
+        <ShowReportModal
+            visible={modalShowReportVisible}
+            onClose={handleCloseModalShowReport}
+            taskId={selectedTask?.id}
+            taskType={selectedTask?.type}
+            task={selectedTask}
+            filters={filters}
+            pageIndex={pageIndex}
+            pageSize={pageSize}
+        />
+    </Card>
+);
 };
 
 export default ListTaskManager;
